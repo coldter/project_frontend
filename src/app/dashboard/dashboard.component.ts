@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   yearsData: Array<object> = [];
   streams = ['B.SC.(IT)', 'BCA', 'MCA', 'M.SC.(IT)'];
   streamsData = [];
+  streamsUnsortedObject: Array<object> = [];
   totalStudents = 0;
   chart1: any;
   chart2: any;
@@ -34,20 +35,24 @@ export class DashboardComponent implements OnInit {
     this.students = resp.data;
     this.totalStudents = this.students.length;
     this.streams.forEach(async (stream) => {
-      const res = this.rest.getStudents({ department: stream });
-      this.quickFixPromiseArray.push(res);
-      const resp = await res;
-      this.streamsData.push(resp.data.length);
+      this.quickFixPromiseArray.push(
+        this.rest.getStudents({ department: stream }).then((resp) => {
+          this.streamsUnsortedObject.push({
+            stream,
+            data: resp.data.length,
+          });
+        })
+      );
     });
-    this.years.forEach(async (year) => {
-      const res = await this.rest.getStudents({ year });
-      //@ts-ignore
-      this.quickFixPromiseArray.push(res);
-      const resp = await res;
-      this.yearsData.push({
-        year,
-        data: resp.data.length,
-      });
+    this.years.forEach((year) => {
+      this.quickFixPromiseArray.push(
+        this.rest.getStudents({ year }).then((resp) => {
+          this.yearsData.push({
+            year,
+            data: resp.data.length,
+          });
+        })
+      );
     });
 
     await Promise.all(this.quickFixPromiseArray);
@@ -55,8 +60,20 @@ export class DashboardComponent implements OnInit {
     // sorting the yearsData array
     this.yearsData.sort(function (a, b) {
       // @ts-ignore
-      return a.year - b.year;
+      if (a.year < b.year) return -1;
+      return 0;
     });
+
+    // sorting the streamsData array
+    this.streamsData = this.streamsUnsortedObject
+      .sort((a, b) => {
+        // @ts-ignore
+        return this.streams.indexOf(a.stream) - this.streams.indexOf(b.stream);
+      })
+      // @ts-ignore
+      .map((obj) => obj.data);
+
+    console.log(this.streamsData);
 
     this.chart1 = new Chart('myChart', {
       type: 'bar',
