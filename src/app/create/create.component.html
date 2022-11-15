@@ -1,0 +1,182 @@
+<div class="newForm">
+  <mat-card class="mat-elevation-z4">
+    <mat-card-subtitle>*All fields are required</mat-card-subtitle>
+    <form [formGroup]="form" name="form" (ngSubmit)="onSubmit()">
+      <!-- <button mat-stroke-button type="button" (click)="filePicker.click()">Pick Image</button> -->
+      <input type="file" #filePicker (change)="onImagePicked($event)" />
+
+      <div class="image-preview" (click)="filePicker.click()">
+        <img
+          matTooltip="Upload Image"
+          class="default"
+          *ngIf="!imgPreview"
+          src="https://cdn.onlinewebfonts.com/svg/img_508039.png"
+        />
+        <img
+          [src]="imgPreview"
+          class="uploaded"
+          *ngIf="imgPreview && form.get('image').valid"
+          [alt]="form.value.name"
+        />
+      </div>
+
+      <mat-form-field>
+        <input matInput placeholder="Name" formControlName="name" type="text" />
+        <mat-error *ngIf="form.get('name').invalid && form.get('name').touched"
+          >This field is required!
+        </mat-error>
+      </mat-form-field>
+
+      <!-- <div formGroupName="name" style="display: flex;">
+                <mat-form-field class="example-full-width">
+                <mat-label>First name</mat-label>
+                <input matInput  formControlName="firstname" type="text">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-label>Last Name</mat-label>
+                <input matInput  formControlName="lastname" type="text">
+              </mat-form-field>
+            </div> -->
+
+      <div style="display: flex">
+        <mat-form-field style="margin-right: 4%; width: 25%">
+          <mat-label>Year</mat-label>
+          <mat-select formControlName="year">
+            <mat-option [value]="1">1</mat-option>
+            <mat-option [value]="2">2</mat-option>
+            <mat-option [value]="3">3</mat-option>
+            <mat-option [value]="4">4</mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="form.get('year').invalid && form.get('year').touched"
+          >
+            This field is required!</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field style="width: 30%">
+          <mat-label>Department</mat-label>
+          <mat-select formControlName="department">
+            <mat-option value="B.SC.(IT)">B.SC.(IT)</mat-option>
+            <mat-option value="BCA">BCA</mat-option>
+            <mat-option value="MCA">MCA</mat-option>
+            <mat-option value="M.SC.(IT)">M.SC.(IT)</mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="
+              form.get('department').invalid && form.get('department').touched
+            "
+          >
+            This field is required!</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div style="display: flex">
+        <mat-form-field style="margin-right: 4%; width: 25%">
+          <mat-label>Joining Year</mat-label>
+          <mat-select formControlName="joining_year">
+            <mat-option [value]="2016">2016</mat-option>
+            <mat-option [value]="2017">2017</mat-option>
+            <mat-option [value]="2018">2018</mat-option>
+            <mat-option [value]="2019">2019</mat-option>
+            <mat-option [value]="2020">2020</mat-option>
+            <mat-option [value]="2021">2021</mat-option>
+            <mat-option [value]="2022">2022</mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="
+              form.get('joining_year').invalid &&
+              form.get('joining_year').touched
+            "
+          >
+            This field is required!</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field style="width: 30%">
+          <mat-label>Expected Year Of Graduation</mat-label>
+          <mat-select formControlName="passing_year">
+            <mat-option [value]="2020">2020</mat-option>
+            <mat-option [value]="2021">2021</mat-option>
+            <mat-option [value]="2022">2022</mat-option>
+            <mat-option [value]="2023">2023</mat-option>
+            <mat-option [value]="2024">2024</mat-option>
+            <mat-option [value]="2025">2025</mat-option>
+            <mat-option [value]="2026">2025</mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="
+              form.get('passing_year').invalid &&
+              form.get('passing_year').touched
+            "
+          >
+            This field is required!</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <mat-form-field>
+        <textarea
+          matInput
+          placeholder="Address"
+          formControlName="address"
+          type="text"
+          rows="2"
+        ></textarea>
+        <mat-error
+          *ngIf="form.get('address').invalid && form.get('address').touched"
+        >
+          This field is required!
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          formControlName="phone"
+          matInput
+          placeholder="Contact No."
+          type="number"
+        />
+        <mat-error
+          *ngIf="form.get('phone').invalid && form.get('phone').touched"
+        >
+          This field is required!
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          formControlName="email"
+          matInput
+          placeholder="Email"
+          type="email"
+        />
+        <mat-error
+          *ngIf="form.get('email').invalid && form.get('email').touched"
+        >
+          This field is required!
+        </mat-error>
+      </mat-form-field>
+
+      <mat-card-actions align="end">
+        <button
+          type="submit"
+          [disabled]="!form.valid"
+          mat-raised-button
+          color="primary"
+        >
+          Save
+        </button>
+        <button
+          type="button"
+          (click)="onClose()"
+          mat-raised-button
+          color="warn"
+        >
+          Cancel
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

@@ -1,0 +1,96 @@
+<!--For list of students-->
+<!-- <form class="example" #searchText="ngForm" (submit)="search(searchText)" style="margin:0 auto;max-width:350px;">
+  <input type="text" placeholder="Search" name="search" ngModel>
+  <button type="submit"><i class="fa fa-search"></i></button>
+</form> -->
+<div class="input">
+  <mat-form-field style="margin: 10px">
+    <mat-label>Year</mat-label>
+    <mat-select [(ngModel)]="filterYear">
+      <mat-option [value]="1">1</mat-option>
+      <mat-option [value]="2">2</mat-option>
+      <mat-option [value]="3">3</mat-option>
+      <mat-option [value]="4">4</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field style="margin: 10px">
+    <mat-label>Department</mat-label>
+    <mat-select [(ngModel)]="filterDept">
+      <mat-option value="B.SC.(IT)">B.SC.(IT)</mat-option>
+      <mat-option value="BCA">BCA</mat-option>
+      <mat-option value="MCA">MCA</mat-option>
+      <mat-option value="M.SC.(IT)">M.SC.(IT)</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-button (click)="filter()">Filter</button>
+  <button mat-button (click)="clearFilter()">Clear</button>
+</div>
+
+<span class="icon" style="z-index: 5">
+  <button *ngIf="!listView" (click)="listView = !listView">
+    <mat-icon fontSet="material-icons-outlined">view_list</mat-icon>
+  </button>
+  <button *ngIf="listView" (click)="listView = !listView">
+    <mat-icon fontSet="material-icons-outlined">view_module</mat-icon>
+  </button>
+</span>
+
+<div class="content" *ngIf="listView">
+  <mat-nav-list
+    *ngFor="let student of students; let i = index"
+    class="list"
+    (click)="openDialog(student, i)"
+  >
+    <mat-list-item matRipple>
+      <img
+        matListAvatar
+        [src]="'http://localhost:3000/images/' + student.image"
+        alt="img of {{ student.name }}"
+      />
+      <div mat-line style="margin-left: 7px">{{ student.name }}</div>
+      <div mat-line style="margin-left: 7px">
+        {{ student.department | uppercase }}
+      </div>
+      <div mat-line style="margin-left: 7px">
+        {{ student.passing_year + " Batch" }}
+      </div>
+    </mat-list-item>
+    <mat-divider [inset]="true"></mat-divider>
+  </mat-nav-list>
+</div>
+
+<div
+  fxLayout="row wrap"
+  fxLayoutGap="10px grid"
+  class="contentGrid"
+  *ngIf="!listView"
+  style="display: block; width: 90%"
+>
+  <div
+    fxFlex="25%"
+    fxFlex.xs="100%"
+    fxFlex.sm="50%"
+    *ngFor="let student of students; let i = index"
+    style="padding: 10px"
+  >
+    <mat-card matRipple class="card" (click)="openDialog(student, i)">
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>
+            <img
+              matListAvatar
+              [src]="'http://localhost:3000/images/' + student.image"
+              alt="img of {{ student.name }}"
+            />
+            <div mat-line>
+              <strong>{{ student.name }}</strong>
+            </div>
+            <div mat-line>{{ student.department | uppercase }}</div>
+            <!-- <div mat-line>{{student.year}}</div> -->
+            <div mat-line>{{ student.passing_year + " Batch" }}</div>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

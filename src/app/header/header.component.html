@@ -1,0 +1,144 @@
+<mat-sidenav-container class="header">
+  <mat-sidenav #sidenav mode="over">
+    <mat-list>
+      <div class="details">
+        <p *ngIf="!isLogged">
+          You are not logged in!<br />
+          Login to see details!
+        </p>
+        <mat-list-item *ngIf="name !== ''">
+          <img
+            matListAvatar
+            style="display: block"
+            src="https://cdn-icons-png.flaticon.com/512/2784/2784445.png"
+            alt="img of a man"
+          />
+          <div mat-line class="mat-title">{{ name }}</div>
+          <div mat-line>{{ email }}</div>
+        </mat-list-item>
+        <mat-list-item *ngIf="name !== ''">
+          <button class="manage" mat-button isRoundButton (click)="manage()">
+            Manage Your Profile
+          </button>
+        </mat-list-item>
+      </div>
+    </mat-list>
+    <mat-divider></mat-divider>
+
+    <mat-nav-list *ngIf="isLogged">
+      <a mat-list-item [routerLink]="['/dashboard']" routerLinkActive="active">
+        <mat-icon matListIcon>dashboard</mat-icon>
+        <div mat-line>Dashboard</div>
+      </a>
+      <a mat-list-item [routerLink]="['/list']" routerLinkActive="active">
+        <mat-icon matListIcon>group</mat-icon>
+        <div mat-line>Students</div>
+      </a>
+      <a mat-list-item [routerLink]="['/settings']" routerLinkActive="active">
+        <mat-icon matListIcon>settings</mat-icon>
+        <div mat-line>Settings</div>
+      </a>
+      <a mat-list-item [routerLink]="['/help']" routerLinkActive="active">
+        <mat-icon matListIcon>help</mat-icon>
+        <div mat-line>Help</div>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content style="padding: 0px">
+    <mat-toolbar
+      color="primary"
+      class="mat-elevation-z6 app-toolbar"
+      *ngIf="routes.route !== '/login' && routes.route !== '/register'"
+    >
+      <button
+        mat-icon-button
+        *ngIf="routes.route != '/editStudent' && routes.route != '/newStudent'"
+        class="example-icon"
+        aria-label="Example icon-button with menu icon"
+      >
+        <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+      </button>
+
+      <button
+        mat-icon-button
+        *ngIf="routes.route == '/editStudent' || routes.route == '/newStudent'"
+        class="example-icon"
+        aria-label="Example icon-button with menu icon"
+      >
+        <mat-icon (click)="goBack()">arrow_back_ios</mat-icon>
+      </button>
+      <div style="margin-left: 5px">
+        <span *ngIf="routes.route == '/login'">Login</span>
+        <span *ngIf="routes.route == '/register'">Register</span>
+        <span *ngIf="routes.route == '/editStudent'">Edit Student</span>
+        <span *ngIf="routes.route == '/dashboard'">Dashboard</span>
+        <span *ngIf="routes.route == '/user'">User Profile</span>
+        <span *ngIf="routes.route == '/list'">Students</span>
+        <span *ngIf="routes.route == '/settings'">Settings</span>
+        <span *ngIf="routes.route == '/help'">Help</span>
+        <span *ngIf="routes.route == '/newStudent'">Add Student</span>
+      </div>
+
+      <form
+        *ngIf="routes.route == '/list'"
+        class="example"
+        style="margin: 0 auto; max-width: 350px"
+      >
+        <input
+          type="text"
+          placeholder="Search"
+          name="search"
+          [(ngModel)]="searchText"
+          (change)="search()"
+        />
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+
+      <button
+        mat-icon-button
+        style="float: right; position: absolute; right: 80px"
+        class="example-icon"
+        [matMenuTriggerFor]="aboveMenu"
+        aria-label="Example icon-button with notification icon"
+      >
+        <mat-icon [matBadge]="notifCount" matBadgeColor="warn"
+          >notifications</mat-icon
+        >
+      </button>
+      <mat-menu #aboveMenu="matMenu" xPosition="before">
+        <button mat-menu-item *ngFor="let notif of notifs">
+          <span>{{ notif.message }}</span>
+        </button>
+      </mat-menu>
+
+      <button
+        style="float: right; position: absolute; right: 20px"
+        class="example-icon2"
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu">
+        <button (click)="logout()" mat-menu-item *ngIf="name !== ''">
+          <mat-icon>login</mat-icon>
+          <span><a>Logout</a></span>
+        </button>
+        <button mat-menu-item *ngIf="name === ''">
+          <mat-icon>login</mat-icon>
+          <span><a routerLink="/login" (click)="onLogin()">Login</a></span>
+        </button>
+        <button mat-menu-item *ngIf="name === ''">
+          <mat-icon>login</mat-icon>
+          <span
+            ><a routerLink="/register" (click)="onRegister()">Register</a></span
+          >
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+
+    <app-footer></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

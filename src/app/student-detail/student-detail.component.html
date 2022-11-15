@@ -1,0 +1,96 @@
+<div class="container">
+    <div class="options">
+        <button mat-icon-button matTooltip="Edit Details" (click)="openDialog('Edit')" >
+            <mat-icon>create</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Copy Details" (click)="openDialog('Copy')">
+            <mat-icon>content_copy</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Delete Details" (click)="openDialog('Delete')">
+                <mat-icon>delete</mat-icon>
+        </button>
+
+        <button mat-icon-button matTooltip="Close" (click)="onClose()">
+            <mat-icon>close</mat-icon>
+        </button>
+
+    </div>
+    <br>
+
+    <div class="content">
+        <mat-list>
+            <img matListAvatar [src]="'http://localhost:3000/images/'+student.image" alt="Image of {{student.name}}"
+                id="profile">
+            <mat-list-item>
+                <div style="margin:10px 0;">
+                    <!-- <span class="mat-body-strong" style="color:grey;display:inline-block;">Name:</span> -->
+                    <span class="mat-headline" style="font-weight:800;">{{student.name}}</span>
+                </div>
+            </mat-list-item>
+            <mat-list-item style="display: flex;">
+                <div style="margin-right: 25px;">
+                    <span class="mat-body-strong" style="color:grey;display:inline-block;">Year:</span>
+                    <span class="mat-h3" *ngIf="student.year==1">{{student.year+"st"}}</span>
+                    <span class="mat-h3" *ngIf="student.year==2">{{student.year+"nd"}}</span>
+                    <span class="mat-h3" *ngIf="student.year==3">{{student.year+"rd"}}</span>
+                    <span class="mat-h3" *ngIf="student.year==4">{{student.year+"th"}}</span>
+                </div>
+                <div>
+                    <span class="mat-body-strong" style="color:grey;display:inline-block;">Department:</span>
+                    <span class="mat-h3">{{student.department}}</span>
+
+                </div>
+            </mat-list-item>
+
+            <mat-list-item style="display: flex;">
+                <div style="margin-right: 25px;">
+                    <span class="mat-body-strong" style="color:grey;display:inline-block;">Joining
+                        Year:</span>
+                    <span class="mat-h3">{{student.joining_year}}</span>
+                </div>
+                <div>
+                    <span class="mat-body-strong" style="color:grey;display:inline-block;">Expected Graduation
+                        Passing:</span>
+                    <span class="mat-h3">{{student.passing_year}}</span>
+
+                </div>
+            </mat-list-item>
+
+            <mat-list-item>
+                <div style="display: flex;">
+                    <span>
+                        <mat-icon style="font-size: 20px;">email</mat-icon>
+                    </span>
+                    <span class="mat-h4">
+                        {{student.email}}
+                    </span>
+                </div>
+
+            </mat-list-item>
+            <mat-list-item>
+                <div style="display: flex;">
+                    <span>
+                        <mat-icon style="font-size: 20px;">home</mat-icon>
+                    </span>
+                    <span class="mat-h4">
+                        {{student.address}}
+                    </span>
+                </div>
+
+            </mat-list-item>
+
+            <mat-list-item>
+                <div style="display: flex;">
+                    <span>
+                        <mat-icon style="font-size: 20px;">phone</mat-icon>
+                    </span>
+                    <span class="mat-h4">
+                        {{student.phone}}
+                    </span>
+                </div>
+
+            </mat-list-item>
+        </mat-list>
+
+    </div>
+    </div>

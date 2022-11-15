@@ -1,0 +1,68 @@
+<div class="content">
+    <div *ngIf="route.route==='/register'" class="register">
+        <mat-card class="mat-elevation-z2">
+            <mat-card-title style="text-align: center;margin-top: 20px;">Sign Up</mat-card-title>
+
+            <div *ngIf="alert" style="width:80%;margin: 0 auto;margin-top:5%;"
+                class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success</strong> Data Saved!
+                <button (click)="onClose()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span style="float: right;" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div *ngIf="danger" style="width:80%;margin: 0 auto;margin-top:5%;"
+                class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>User already exists!</strong>Data not saved!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span style="float: right;" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+
+            <form (ngSubmit)="registerUser(f)" #f="ngForm">
+
+                <mat-form-field>
+                    <input matInput placeholder="Name" type="name" name="name" required ngModel #name="ngModel">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="Email" type="email" name="email" required ngModel #email="ngModel">
+                    <mat-icon matSuffix style="font-size:18px;">email</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="Password" name="password" [type]="hide ? 'password' : 'text'" ngModel
+                        #password="ngModel" required >
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <!-- <mat-hint>Password must be valid</mat-hint> -->
+                    <mat-error><div *ngIf="password.errors">Password must be valid</div></mat-error>
+
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Confirm your password" name="confirmPassword"
+                        [type]="hide ? 'password' : 'text'" #confirmPassword="ngModel" ngModel required>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+
+                </mat-form-field>
+                
+
+
+                <mat-card-actions style="margin-top: 10px;"><button [disabled]="!f.valid && password.value===confirmPassword.value" mat-raised-button
+                        color="primary" type="submit">Register</button></mat-card-actions>
+                <mat-card-actions style="text-align: center;">
+                    <span> Already have an account?</span>
+                    <button (click)="router.navigate(['login'])" mat-button type="button" style="width: 15%;">
+                        Login
+                    </button></mat-card-actions>
+            </form>
+
+        </mat-card>
+    </div>
+</div>

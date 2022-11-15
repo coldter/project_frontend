@@ -1,0 +1,49 @@
+mat-card{
+    display:block;
+    width:60%;
+    margin:15px auto;
+}
+.default,.uploaded{
+    /* border-radius: 40%; */
+    display: block;
+    margin:0 auto;
+}
+.uploaded{
+    border-radius: 50%;
+    height:95px;
+    width:90px;
+}
+mat-form-field{
+    width:100%;
+}
+.example-full-width{
+    width:40%;
+    margin-right:15px;
+    
+}
+
+.newForm{
+    
+    height:80%;
+}
+input[type="file"]{
+    visibility: hidden;
+}
+.image-preview{
+    height:5rem;
+    cursor: pointer;
+}
+.image-preview img{
+    height:100%;
+}
+button{
+    outline: none;
+    border: none;
+}
+@media screen and (max-width:600px){
+    mat-card{
+        display:block;
+        width:80%;
+        margin:15px auto;
+    }
+}

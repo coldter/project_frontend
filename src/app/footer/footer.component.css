@@ -1,0 +1,28 @@
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    float: right;
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index: 15;
+  }
+  button{
+    outline: none;
+    border: none;
+}
+  @media screen and (max-width:800px){
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      width: 100px;
+      float: right;
+      position:fixed;
+      right:10px;
+      bottom:10px;
+      z-index: 15;
+    }
+  }

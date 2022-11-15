@@ -1,0 +1,115 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+form.example{
+  z-index:16;
+  position: absolute;
+  top:25px;
+  left: 50%;
+}
+form.example input[type=text] {
+  font-size:15px;
+  float: left;
+  width:80%;
+  padding-left: 20px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  outline: none;
+  border: none;
+  background: #f1f1f1;
+}
+::placeholder{
+  font-size:12px;
+}
+form.example button {
+  float: left;
+  width:20%;
+  /* background: #2196F3;
+  color: white; */
+  outline: none;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border: none;
+  font-size: 15px;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: lightslategrey;
+}
+button{
+  outline:none;
+  border:none;
+}
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+  
+.list {
+   
+    width:100%;
+   
+   }
+  .icon{
+    float:right;
+    position:absolute;
+    top:15%;
+    right:20px;
+  }
+  button{
+    outline: none;
+    border: none;
+}
+  .icon button{
+    outline: none;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+  }
+  
+  
+  mat-list-item{
+    display: inline;
+    cursor: pointer;
+  }
+  
+  
+  .input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @media only screen and (max-width: 600px) {
+    
+    
+    .icon{
+      float:right;
+      position:absolute;
+      top:14%;
+      right:20px;
+    }
+  }
+
+  @media only screen and (max-width: 800px) {
+    
+  
+  .icon{
+    float:right;
+    position:absolute;
+    top:13%;
+    right:20px;
+  }
+    
+    mat-form-field{
+      width:60px;;
+    }
+    .input{
+        display: flex;
+        width:100%;
+    }
+
+  }

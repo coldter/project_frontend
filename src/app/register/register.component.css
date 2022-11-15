@@ -1,0 +1,52 @@
+form{
+    margin-top:30px;
+}
+
+mat-form-field,mat-card-actions,.options{
+    display: block;
+    width:80%;
+    margin:0 auto;
+}
+.content{
+    width:100vw;
+    min-height: 80vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.register{
+    width:38%;
+    display:block;
+    margin:30px auto;
+}
+
+ button{
+     width:100%;
+        outline: none;
+        border: none;
+ }
+
+  .signup{
+      color: blue;
+  }
+
+  .signup:hover{
+      text-decoration: underline;
+      background:blue;
+      border:lightblue;
+      color: white;
+      padding:1px;
+      border-radius: 5px;
+      cursor:pointer;
+
+  }
+  
+  @media screen and (max-width:1000px){
+
+    .login,.register{
+        width:80%;
+        display:block;
+        margin:30px auto;
+    }
+
+  }

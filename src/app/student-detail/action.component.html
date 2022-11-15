@@ -1,0 +1,14 @@
+<div class="content">
+    <p>Are you sure you want to {{data.message}}?</p>
+    <mat-dialog-actions>
+
+        <button *ngIf="data.message==='Edit'" mat-button (click)="router.navigate(['/editStudent'],{state: {data: student}})"
+            mat-dialog-close>Yes,sure</button>
+            <button *ngIf="data.message==='Copy'" mat-button (click)="router.navigate(['/newStudent'],{state: {data: student}})"
+            mat-dialog-close>Yes,sure</button>
+        <button *ngIf="data.message==='Delete'" mat-button type="button" mat-dialog-close
+           >Yes,sure</button>
+        <button mat-button mat-dialog-close>Close</button>
+
+    </mat-dialog-actions>
+</div>

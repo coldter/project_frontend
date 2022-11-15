@@ -1,0 +1,175 @@
+<div class="full">
+  <mat-card class="graph-card">
+    <div class="full-grid">
+      <div class="center-div">
+        <div style="text-align: center">
+          <p style="color: grey; margin-bottom: 20px">
+            Division of Students wrt Year
+          </p>
+          <div id="chart">
+            <canvas id="myPChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="center-div">
+        <div style="text-align: center; padding: 5px">
+          <p style="color: grey; margin-bottom: 20px">
+            Division of Students wrt Branch
+          </p>
+          <div id="chart">
+            <canvas id="myChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="total" [routerLink]="['/list']">
+      <mat-card class="card1">
+        <mat-card-content>
+          <div style="text-align: center">
+            <p class="mat-h4">Total Students</p>
+            <br />
+            <p class="mat-display-4">{{ totalStudents }}</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-card>
+  <div style="display: flex; justify-content: space-evenly">
+    <p
+      style="
+        width: 100%;
+        text-align: center;
+        text-decoration: underline;
+        color: grey;
+      "
+      class="mat-h2 heading"
+    >
+      Division of Students by Year
+    </p>
+    <p
+      style="
+        width: 100%;
+        text-align: center;
+        text-decoration: underline;
+        color: grey;
+      "
+      class="mat-h2 heading"
+    >
+      Division of Students by Branch
+    </p>
+  </div>
+
+  <div class="grid-col">
+    <mat-card class="grid-col cards">
+      <mat-card class="card" (click)="onClick(1)" style="margin-bottom: 10px">
+        <mat-card-content class="center-div">
+          <div>
+            <p class="mat-h4">1st Year</p>
+            <p class="mat-display-3" style="text-align: center">
+              {{ yearsData[0] }}
+            </p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="card" (click)="onClick(2)" style="margin-bottom: 10px">
+        <mat-card-content class="center-div">
+          <div>
+            <p class="mat-h4">2nd Year</p>
+            <p class="mat-display-3" style="text-align: center">
+              {{ yearsData[1] }}
+            </p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="card" (click)="onClick(3)">
+        <mat-card-content class="center-div">
+          <div>
+            <p class="mat-h4">3rd Year</p>
+            <p class="mat-display-3" style="text-align: center">
+              {{ yearsData[2] }}
+            </p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="card" (click)="onClick(4)">
+        <mat-card-content class="center-div">
+          <div>
+            <p class="mat-h4">4th Year</p>
+            <p class="mat-display-3" style="text-align: center">
+              {{ yearsData[3] }}
+            </p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-card>
+
+    <mat-card class="three-grid">
+      <mat-card
+        class="card"
+        [routerLink]="['/list']"
+        style="margin-bottom: 15px"
+        (click)="onStream('B.SC.(IT)')"
+      >
+        <mat-card-content class="center-div">
+          <div>
+            <p class="mat-h4">B.SC.(IT)</p>
+            <p class="mat-display-2" style="text-align: center">
+              {{ streamsData[0] }}
+            </p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card
+        class="card"
+        [routerLink]="['/list']"
+        (click)="onStream('BCA')"
+        style="margin-bottom: 15px"
+      >
+        <mat-card-content class="center-div">
+          <div>
+            <p class="mat-h4">BCA</p>
+            <p class="mat-display-2" style="text-align: center">
+              {{ streamsData[1] }}
+            </p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card
+        class="card"
+        [routerLink]="['/list']"
+        (click)="onStream('MCA')"
+        style="margin-bottom: 10px"
+      >
+        <mat-card-content class="center-div">
+          <div>
+            <p class="mat-h4">MCA</p>
+            <p class="mat-display-2" style="text-align: center">
+              {{ streamsData[2] }}
+            </p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card
+        class="card"
+        [routerLink]="['/list']"
+        (click)="onStream('M.SC.(IT)')"
+      >
+        <mat-card-content class="center-div">
+          <div>
+            <p class="mat-h4">M.SC.(IT)</p>
+            <p class="mat-display-2" style="text-align: center">
+              {{ streamsData[3] }}
+            </p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-card>
+  </div>
+</div>

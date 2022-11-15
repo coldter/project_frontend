@@ -1,0 +1,8 @@
+<div class="button-container" *ngIf="routes.route!=='/newStudent' && routes.route!=='/register' && routes.route!=='/editStudent' && routes.route!=='/login' && routes.route!=='/dashboard'">
+    <button mat-fab color="accent" aria-label="Example icon button with a more icon"><a  style="text-decoration: none;color: white;" routerLink="/newStudent">
+      <mat-icon>person_add_alt_1</mat-icon></a>
+    </button>
+  </div>
+
+  
+<router-outlet></router-outlet>
