@@ -5,11 +5,11 @@ import { ServerResponse } from '../models/server-response.model';
 import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RestService {
-  baseUrl = 'http://localhost:3000/';
-  constructor(private http: HttpClient) { }
+  baseUrl = 'https://expressjs-mongoose-production-11e0.up.railway.app/';
+  constructor(private http: HttpClient) {}
   private students: Student[] = [];
   private studentsUpdated = new Subject<Student[]>();
 
@@ -23,7 +23,7 @@ export class RestService {
     const key0 = keys[0];
     qparam = '?' + key0 + '=' + paramMap[key0];
 
-    keys.forEach(element => {
+    keys.forEach((element) => {
       if (element === key0) {
         return;
       }
@@ -32,10 +32,11 @@ export class RestService {
     return qparam;
   }
 
-  public getStudentonSearch(query: string){
+  public getStudentonSearch(query: string) {
     const url = `${this.baseUrl}students/search`;
-    return this.http.post<ServerResponse<Student[]>>(url, { query }).toPromise();
-
+    return this.http
+      .post<ServerResponse<Student[]>>(url, { query })
+      .toPromise();
   }
   public getAllStudents(): Promise<ServerResponse<Student[]>> {
     const url = `${this.baseUrl}students`;
@@ -46,7 +47,10 @@ export class RestService {
     const url = `${this.baseUrl}students${this.formatQuery(queries)}`;
     return this.http.get<ServerResponse<Student[]>>(url).toPromise();
   }
-  public addStudent(student: Student, file: File): Promise<ServerResponse<Student>> {
+  public addStudent(
+    student: Student,
+    file: File
+  ): Promise<ServerResponse<Student>> {
     const postData = new FormData();
     Object.keys(student).forEach((key) => {
       postData.append(key, student[key]);
@@ -68,9 +72,10 @@ export class RestService {
     return this.http.get(url, { responseType: 'blob' }).toPromise();
   }
   public deleteStudent(id: string) {
-
     const url = `${this.baseUrl}students/${id}`;
-    return this.http.delete<{ message: string, status: boolean }>(url).toPromise();
+    return this.http
+      .delete<{ message: string; status: boolean }>(url)
+      .toPromise();
   }
 
   public updateStudent(student: Student, file?: File) {

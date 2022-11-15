@@ -5,10 +5,11 @@ import { ServerResponse } from '../models/server-response.model';
 import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:3000/';
+  private baseUrl =
+    'https://expressjs-mongoose-production-11e0.up.railway.app/';
   login: Login;
   loginObserver = new Subject<Login>();
   loginObserver$ = this.loginObserver.asObservable();
@@ -29,9 +30,14 @@ export class AuthService {
     return this.http.post<ServerResponse<User>>(url, user).toPromise();
   }
 
-  public loginUser(email: string, password: string): Promise<ServerResponse<Login>> {
+  public loginUser(
+    email: string,
+    password: string
+  ): Promise<ServerResponse<Login>> {
     const url = `${this.baseUrl}auth/login`;
-    return this.http.post<ServerResponse<Login>>(url, { email, password }).toPromise();
+    return this.http
+      .post<ServerResponse<Login>>(url, { email, password })
+      .toPromise();
   }
 
   public storeLogin(log: Login) {
