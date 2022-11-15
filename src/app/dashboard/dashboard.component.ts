@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Student } from '../models/student.model';
 import { RestService } from '../services/rest.service';
 import { Chart } from 'node_modules/chart.js';
-import { async } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { state } from '@angular/animations';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +19,7 @@ export class DashboardComponent implements OnInit {
   totalStudents = 0;
   chart1: any;
   chart2: any;
+  quickFixPromiseArray: Promise<any>[] = [];
   constructor(private rest: RestService, private router: Router) {
     this.fetchData();
   }
@@ -36,15 +34,21 @@ export class DashboardComponent implements OnInit {
     this.students = resp.data;
     this.totalStudents = this.students.length;
     this.streams.forEach(async (stream) => {
-      const res = await this.rest.getStudents({ department: stream });
-      this.streamsData.push(res.data.length);
+      const res = this.rest.getStudents({ department: stream });
+      this.quickFixPromiseArray.push(res);
+      const resp = await res;
+      this.streamsData.push(resp.data.length);
     });
     this.years.forEach(async (year) => {
       const res = await this.rest.getStudents({ year });
-      this.yearsData.push(res.data.length);
+      //@ts-ignore
+      this.quickFixPromiseArray.push(res);
+      const resp = await res;
+      this.yearsData.push(resp.data.length);
     });
-    console.log(this.streamsData);
-    console.log(this.yearsData);
+
+    await Promise.all(this.quickFixPromiseArray);
+
     this.chart1 = new Chart('myChart', {
       type: 'bar',
       data: {
