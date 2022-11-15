@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit {
         datasets: [
           {
             data: this.streamsData,
-
+            label: 'Students',
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
               'rgba(54, 162, 235, 0.2)',
@@ -77,18 +77,19 @@ export class DashboardComponent implements OnInit {
             {
               ticks: {
                 min: 0,
-                max: 50,
+                max: 30,
               },
             },
           ],
         },
+        responsive: true,
       },
     });
 
     this.chart2 = new Chart('myPChart', {
       type: 'pie',
       data: {
-        labels: ['1', '2', '3', '4'],
+        labels: ['First', 'Second', 'Third', 'Fourth'],
         datasets: [
           {
             backgroundColor: ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9'],
