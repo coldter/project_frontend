@@ -75,7 +75,7 @@
           <div>
             <p class="mat-h4">1st Year</p>
             <p class="mat-display-3" style="text-align: center">
-              {{ yearsData[0] }}
+              {{ $any(yearsData[0]).data }}
             </p>
           </div>
         </mat-card-content>
@@ -86,7 +86,7 @@
           <div>
             <p class="mat-h4">2nd Year</p>
             <p class="mat-display-3" style="text-align: center">
-              {{ yearsData[1] }}
+              {{ $any(yearsData[1]).data }}
             </p>
           </div>
         </mat-card-content>
@@ -97,7 +97,7 @@
           <div>
             <p class="mat-h4">3rd Year</p>
             <p class="mat-display-3" style="text-align: center">
-              {{ yearsData[2] }}
+              {{ $any(yearsData[2]).data }}
             </p>
           </div>
         </mat-card-content>
@@ -108,7 +108,7 @@
           <div>
             <p class="mat-h4">4th Year</p>
             <p class="mat-display-3" style="text-align: center">
-              {{ yearsData[3] }}
+              {{ $any(yearsData[3]).data }}
             </p>
           </div>
         </mat-card-content>

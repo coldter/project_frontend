@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
   students: Student[];
   toggle = true;
   years = [1, 2, 3, 4];
-  yearsData = [];
+  yearsData: Array<object> = [];
   streams = ['B.SC.(IT)', 'BCA', 'MCA', 'M.SC.(IT)'];
   streamsData = [];
   totalStudents = 0;
@@ -44,10 +44,19 @@ export class DashboardComponent implements OnInit {
       //@ts-ignore
       this.quickFixPromiseArray.push(res);
       const resp = await res;
-      this.yearsData.push(resp.data.length);
+      this.yearsData.push({
+        year,
+        data: resp.data.length,
+      });
     });
 
     await Promise.all(this.quickFixPromiseArray);
+
+    // sorting the yearsData array
+    this.yearsData.sort(function (a, b) {
+      // @ts-ignore
+      return a.year - b.year;
+    });
 
     this.chart1 = new Chart('myChart', {
       type: 'bar',
@@ -97,7 +106,8 @@ export class DashboardComponent implements OnInit {
         datasets: [
           {
             backgroundColor: ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9'],
-            data: this.yearsData,
+            // @ts-ignore
+            data: this.yearsData.map((y) => y.data),
           },
         ],
       },
